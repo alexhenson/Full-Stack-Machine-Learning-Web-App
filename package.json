@@ -3,17 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "nodemon app.js"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@tensorflow/tfjs-node": "^0.1.17",
     "d3": "^7.4.4",
     "danfojs-node": "^1.1.0",
+    "express": "^4.17.3",
     "lodash": "^4.17.11",
     "memoize": "^0.1.1",
     "mnist-data": "^1.2.6",
     "node-remote-plot": "^1.2.0",
+    "nodemon": "^2.0.15",
     "shuffle-seed": "^1.1.6"
   }
 }
