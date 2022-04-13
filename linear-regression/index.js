@@ -34,3 +34,4 @@ plot({
 console.log('R2 is', r2);
 
 // regression.predict([[120, 2, 380]]).print();
+
