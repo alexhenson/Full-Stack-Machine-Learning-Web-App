@@ -16,6 +16,7 @@
     "lodash": "^4.17.11",
     "memoize": "^0.1.1",
     "mnist-data": "^1.2.6",
+    "mongoose": "^6.2.10",
     "node-remote-plot": "^1.2.0",
     "nodemon": "^2.0.15",
     "shuffle-seed": "^1.1.6"
