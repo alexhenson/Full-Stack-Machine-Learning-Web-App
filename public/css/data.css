@@ -31,6 +31,30 @@
     width: 50%;
 }
 
+.container {
+    width: 250px;
+    height: 200px;
+    display: block;
+    margin: auto;
+    border: 1px solid #720570;
+}
+
+.bar {
+    fill: #720570;
+}
+
+.added {
+    background-color: greenyellow;
+}
+
+.redundant {
+    background-color: lightcoral;
+}
+
+.updated {
+    background-color: orange;
+}
+
 button {
     font: inherit;
     border: 1px solid #00695c;
