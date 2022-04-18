@@ -80,98 +80,157 @@
 //       .text('Russia');
 //   }, 6000);
 
-const DUMMY_DATA = [
-  { id: 'd1', value: 10, region: 'USA' },
-  { id: 'd2', value: 11, region: 'India' },
-  { id: 'd3', value: 12, region: 'China' },
-  { id: 'd4', value: 6, region: 'Germany' },
-];
+// const DUMMY_DATA = [
+//   { id: 'd1', value: 10, region: 'USA' },
+//   { id: 'd2', value: 11, region: 'India' },
+//   { id: 'd3', value: 12, region: 'China' },
+//   { id: 'd4', value: 6, region: 'Germany' },
+// ];
 
-const MARGINS = { top: 20, bottom: 10 };
-const CHART_WIDTH = 600;
-const CHART_HEIGHT = 400 - MARGINS.top - MARGINS.bottom;
+// const MARGINS = { top: 20, bottom: 10 };
+// const CHART_WIDTH = 600;
+// const CHART_HEIGHT = 400 - MARGINS.top - MARGINS.bottom;
 
-let selectedData = DUMMY_DATA;
+// let selectedData = DUMMY_DATA;
 
-const x = d3.scaleBand().rangeRound([0, CHART_WIDTH]).padding(0.1); //makes equally sized items along x axis
-const y = d3.scaleLinear().range([CHART_HEIGHT, 0]);
+// const x = d3.scaleBand().rangeRound([0, CHART_WIDTH]).padding(0.1); //makes equally sized items along x axis
+// const y = d3.scaleLinear().range([CHART_HEIGHT, 0]);
 
-const chartContainer = d3
-  .select('svg')
-  .attr('width', CHART_WIDTH)
-  .attr('height', CHART_HEIGHT + MARGINS.top + MARGINS.bottom);
+// const chartContainer = d3
+//   .select('svg')
+//   .attr('width', CHART_WIDTH)
+//   .attr('height', CHART_HEIGHT + MARGINS.top + MARGINS.bottom);
 
-x.domain(DUMMY_DATA.map((d) => d.region));
-y.domain([0, d3.max(DUMMY_DATA, (d) => d.value) + 3]);
+// x.domain(DUMMY_DATA.map((d) => d.region));
+// y.domain([0, d3.max(DUMMY_DATA, (d) => d.value) + 3]);
 
-const chart = chartContainer.append('g');
+// const chart = chartContainer.append('g');
 
-chart
+// chart
+//   .append('g')
+//   .call(d3.axisBottom(x).tickSizeOuter(0))
+//   .attr('transform', `translate(0, ${CHART_HEIGHT})`)
+//   .attr('color', '#4f009e');
+
+// function renderChart() {
+//   chart
+//     .selectAll('.bar')
+//     .data(selectedData, (data) => data.id)
+//     .enter()
+//     .append('rect')
+//     .classed('bar', true)
+//     .attr('width', x.bandwidth())
+//     .attr('height', (data) => CHART_HEIGHT - y(data.value))
+//     .attr('x', (data) => x(data.region))
+//     .attr('y', (data) => y(data.value));
+
+//   chart
+//     .selectAll('.bar')
+//     .data(selectedData, (data) => data.id)
+//     .exit()
+//     .remove();
+
+//   chart
+//     .selectAll('.label')
+//     .data(selectedData, (data) => data.id)
+//     .enter()
+//     .append('text')
+//     .text((data) => data.value)
+//     .attr('x', (data) => x(data.region) + x.bandwidth() / 2)
+//     .attr('y', (data) => y(data.value) - 20)
+//     .attr('text-anchor', 'middle')
+//     .classed('label', true);
+
+//   chart
+//     .selectAll('.label')
+//     .data(selectedData, (data) => data.id)
+//     .exit()
+//     .remove();
+// }
+
+// renderChart();
+
+// let unselectedIds = [];
+
+// Creates the containers for the checkboxes
+// const listItems = d3
+//   .select('#data')
+//   .select('ul')
+//   .selectAll('li')
+//   .data(DUMMY_DATA)
+//   .enter()
+//   .append('li');
+
+// Labels next to the checkboxes
+// listItems.append('span').text((data) => data.region);
+
+// Creates the check boxes
+// listItems
+//   .append('input')
+//   .attr('type', 'checkbox')
+//   .attr('checked', true)
+//   .on('change', (data) => {
+//     if (unselectedIds.indexOf(data.id) === -1) {
+//       unselectedIds.push(data.id);
+//     } else {
+//       unselectedIds = unselectedIds.filter((id) => id !== data.id);
+//     }
+//     selectedData = DUMMY_DATA.filter((d) => unselectedIds.indexOf(d.id) === -1);
+//     renderChart();
+//   });
+
+// d3 code goes here
+const svg = d3.select('svg'),
+  width = svg.attr('width'),
+  height = svg.attr('height'),
+  radius = Math.min(width, height) / 2;
+
+const g = svg
   .append('g')
-  .call(d3.axisBottom(x).tickSizeOuter(0))
-  .attr('transform', `translate(0, ${CHART_HEIGHT})`)
-  .attr('color', '#4f009e');
+  .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
-function renderChart() {
-  chart
-    .selectAll('.bar')
-    .data(selectedData, (data) => data.id)
+const color = d3.scaleOrdinal(['#C7CEEA', '#B5EAD7', '#FFDAC1', '#FF9AA2']);
+
+const carList = [];
+
+const pie = d3.pie().value((d) => {
+  // console.log(d.carname.split(' ')[0])
+  carList.push(d.carname.split(' ')[0]); // need to check values in carList
+});
+const path = d3
+  .arc()
+  .outerRadius(radius - 40)
+  .innerRadius(0);
+const label = d3
+  .arc()
+  .outerRadius(radius)
+  .innerRadius(radius - 150);
+
+d3.csv('data/cars.csv').then((data) => {
+  const arc = g
+    .selectAll('.arc')
+    .data(pie(data))
     .enter()
-    .append('rect')
-    .classed('bar', true)
-    .attr('width', x.bandwidth())
-    .attr('height', (data) => CHART_HEIGHT - y(data.value))
-    .attr('x', (data) => x(data.region))
-    .attr('y', (data) => y(data.value));
+    .append('g')
+    .attr('class', 'arc');
 
-  chart
-    .selectAll('.bar')
-    .data(selectedData, (data) => data.id)
-    .exit()
-    .remove();
+  arc
+    .append('path')
+    .attr('d', path)
+    .attr('fill', (d) => color(d.data.company));
 
-  chart
-    .selectAll('.label')
-    .data(selectedData, (data) => data.id)
-    .enter()
+  arc
     .append('text')
-    .text((data) => data.value)
-    .attr('x', (data) => x(data.region) + x.bandwidth() / 2)
-    .attr('y', (data) => y(data.value) - 20)
-    .attr('text-anchor', 'middle')
-    .classed('label', true);
+    .attr('transform', (d) => 'translate(' + label.centroid(d) + ')')
+    .text((d) => d.data.company);
 
-  chart
-    .selectAll('.label')
-    .data(selectedData, (data) => data.id)
-    .exit()
-    .remove();
-}
+  svg
+    .append('g')
+    .attr('transform', 'translate(' + (width / 2 - 120) + ',' + 20 + ')')
+    .append('text')
+    .text('Passed % of Emmisions Tests')
+    .attr('class', 'title');
+});
 
-renderChart();
-
-let unselectedIds = [];
-
-const listItems = d3
-  .select('#data')
-  .select('ul')
-  .selectAll('li')
-  .data(DUMMY_DATA)
-  .enter()
-  .append('li');
-
-listItems.append('span').text((data) => data.region);
-
-listItems
-  .append('input')
-  .attr('type', 'checkbox')
-  .attr('checked', true)
-  .on('change', (data) => {
-    if (unselectedIds.indexOf(data.id) === -1) {
-      unselectedIds.push(data.id);
-    } else {
-      unselectedIds = unselectedIds.filter((id) => id !== data.id);
-    }
-    selectedData = DUMMY_DATA.filter((d) => unselectedIds.indexOf(d.id) === -1);
-    renderChart();
-  });
+const carSet = new Set(carList);
+console.log(carSet);
