@@ -69,6 +69,8 @@
 #chart {
 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 padding: 1rem;
+margin: auto;
+display: block;
 }
 
 #chart,
@@ -94,11 +96,25 @@ font-weight: bold;
 }
 
 .bar {
-fill: #4f009e;
+fill: #00695c;
 }
 
 .label {
-fill: #4f009e;
+fill: #00695c;
+}
+
+/* pie-chart */
+.arc text{
+	font: 10px sans-serif;
+	text-anchor: middle;
+}
+.arc path{
+	stroke: white;
+}
+.title{
+	fill: black;
+	font-weight: bold;
+	font-size: 20px;
 }
 
 button {
