@@ -80,76 +80,94 @@
 //       .text('Russia');
 //   }, 6000);
 
-// const DUMMY_DATA = [
-//   { id: 'd1', value: 10, region: 'USA' },
-//   { id: 'd2', value: 11, region: 'India' },
-//   { id: 'd3', value: 12, region: 'China' },
-//   { id: 'd4', value: 6, region: 'Germany' },
-// ];
+d3.csv('data/cars.csv').then((data) => {
+  const carMap = new Map();
 
-// const MARGINS = { top: 20, bottom: 10 };
-// const CHART_WIDTH = 600;
-// const CHART_HEIGHT = 400 - MARGINS.top - MARGINS.bottom;
+  for (let obj of data) {
+    carname = obj.carname.split(' ')[0];
+    carMap.set(carname, carMap.has(carname) ? carMap.get(carname) + 1 : 1);
+  }
 
-// let selectedData = DUMMY_DATA;
+  const arr = Array.from(carMap);
 
-// const x = d3.scaleBand().rangeRound([0, CHART_WIDTH]).padding(0.1); //makes equally sized items along x axis
-// const y = d3.scaleLinear().range([CHART_HEIGHT, 0]);
+  const carArrOfObj = arr.map(([key, value]) => {
+    return { make: key, count: value };
+  });
 
-// const chartContainer = d3
-//   .select('svg')
-//   .attr('width', CHART_WIDTH)
-//   .attr('height', CHART_HEIGHT + MARGINS.top + MARGINS.bottom);
+  carArrOfObj.splice(10);
 
-// x.domain(DUMMY_DATA.map((d) => d.region));
-// y.domain([0, d3.max(DUMMY_DATA, (d) => d.value) + 3]);
+  console.log(carArrOfObj);
 
-// const chart = chartContainer.append('g');
+  // const DUMMY_DATA = [
+  //   { id: 'd1', value: 10, region: 'USA' },
+  //   { id: 'd2', value: 11, region: 'India' },
+  //   { id: 'd3', value: 12, region: 'China' },
+  //   { id: 'd4', value: 6, region: 'Germany' },
+  // ];
 
-// chart
-//   .append('g')
-//   .call(d3.axisBottom(x).tickSizeOuter(0))
-//   .attr('transform', `translate(0, ${CHART_HEIGHT})`)
-//   .attr('color', '#4f009e');
+  const MARGINS = { top: 20, bottom: 10 };
+  const CHART_WIDTH = 800;
+  const CHART_HEIGHT = 400 - MARGINS.top - MARGINS.bottom;
 
-// function renderChart() {
-//   chart
-//     .selectAll('.bar')
-//     .data(selectedData, (data) => data.id)
-//     .enter()
-//     .append('rect')
-//     .classed('bar', true)
-//     .attr('width', x.bandwidth())
-//     .attr('height', (data) => CHART_HEIGHT - y(data.value))
-//     .attr('x', (data) => x(data.region))
-//     .attr('y', (data) => y(data.value));
+  let selectedData = carArrOfObj;
 
-//   chart
-//     .selectAll('.bar')
-//     .data(selectedData, (data) => data.id)
-//     .exit()
-//     .remove();
+  const x = d3.scaleBand().rangeRound([0, CHART_WIDTH]).padding(0.1); //makes equally sized items along x axis
+  const y = d3.scaleLinear().range([CHART_HEIGHT, 0]);
 
-//   chart
-//     .selectAll('.label')
-//     .data(selectedData, (data) => data.id)
-//     .enter()
-//     .append('text')
-//     .text((data) => data.value)
-//     .attr('x', (data) => x(data.region) + x.bandwidth() / 2)
-//     .attr('y', (data) => y(data.value) - 20)
-//     .attr('text-anchor', 'middle')
-//     .classed('label', true);
+  const chartContainer = d3
+    .select('svg')
+    .attr('width', CHART_WIDTH)
+    .attr('height', CHART_HEIGHT + MARGINS.top + MARGINS.bottom);
 
-//   chart
-//     .selectAll('.label')
-//     .data(selectedData, (data) => data.id)
-//     .exit()
-//     .remove();
-// }
+  x.domain(carArrOfObj.map((d) => d.make));
+  y.domain([0, d3.max(carArrOfObj, (d) => d.count) + 3]);
 
-// renderChart();
+  const chart = chartContainer.append('g');
 
+  chart
+    .append('g')
+    .call(d3.axisBottom(x).tickSizeOuter(0))
+    .attr('transform', `translate(0, ${CHART_HEIGHT})`)
+    .attr('color', '#4f009e');
+
+  function renderChart() {
+    chart
+      .selectAll('.bar')
+      .data(selectedData, (data) => data.make)
+      .enter()
+      .append('rect')
+      .classed('bar', true)
+      .attr('width', x.bandwidth())
+      .attr('height', (data) => CHART_HEIGHT - y(data.count))
+      .attr('x', (data) => x(data.make))
+      .attr('y', (data) => y(data.count));
+
+    chart
+      .selectAll('.bar')
+      .data(selectedData, (data) => data.make)
+      .exit()
+      .remove();
+
+    chart
+      .selectAll('.label')
+      .data(selectedData, (data) => data.make)
+      .enter()
+      .append('text')
+      .text((data) => data.value)
+      .attr('x', (data) => x(data.make) + x.bandwidth() / 2)
+      .attr('y', (data) => y(data.count) - 20)
+      .attr('text-anchor', 'middle')
+      .classed('label', true);
+
+    chart
+      .selectAll('.label')
+      .data(selectedData, (data) => data.make)
+      .exit()
+      .remove();
+  }
+
+  renderChart();
+});
 // let unselectedIds = [];
 
 // Creates the containers for the checkboxes
@@ -179,58 +197,75 @@
 //     renderChart();
 //   });
 
+// Pie Chart
 // d3 code goes here
-const svg = d3.select('svg'),
-  width = svg.attr('width'),
-  height = svg.attr('height'),
-  radius = Math.min(width, height) / 2;
+// const svg = d3.select('svg'),
+//   width = svg.attr('width'),
+//   height = svg.attr('height'),
+//   radius = Math.min(width, height) / 2;
 
-const g = svg
-  .append('g')
-  .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+// const g = svg
+//   .append('g')
+//   .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
-const color = d3.scaleOrdinal(['#C7CEEA', '#B5EAD7', '#FFDAC1', '#FF9AA2']);
+// const color = d3.scaleOrdinal(['#C7CEEA', '#B5EAD7', '#FFDAC1', '#FF9AA2']);
+// const pie = d3.pie().value((d) => {
+//   d.valueOf()[1];
+// });
 
-const carList = [];
+// const carList = [];
 
-const pie = d3.pie().value((d) => {
-  // console.log(d.carname.split(' ')[0])
-  carList.push(d.carname.split(' ')[0]); // need to check values in carList
-});
-const path = d3
-  .arc()
-  .outerRadius(radius - 40)
-  .innerRadius(0);
-const label = d3
-  .arc()
-  .outerRadius(radius)
-  .innerRadius(radius - 150);
+// const path = d3
+//   .arc()
+//   .outerRadius(radius - 40)
+//   .innerRadius(0);
+// const label = d3
+//   .arc()
+//   .outerRadius(radius)
+//   .innerRadius(radius - 150);
 
-d3.csv('data/cars.csv').then((data) => {
-  const arc = g
-    .selectAll('.arc')
-    .data(pie(data))
-    .enter()
-    .append('g')
-    .attr('class', 'arc');
+// d3.csv('data/cars.csv').then((data) => {
+//   const carMap = new Map();
 
-  arc
-    .append('path')
-    .attr('d', path)
-    .attr('fill', (d) => color(d.data.company));
+//   for (let obj of data) {
+//     carname = obj.carname.split(' ')[0];
+//     carMap.set(carname, carMap.has(carname) ? carMap.get(carname) + 1 : 1);
+//   }
 
-  arc
-    .append('text')
-    .attr('transform', (d) => 'translate(' + label.centroid(d) + ')')
-    .text((d) => d.data.company);
+//   for (let carname of carMap) {
+//     carMap.set(carname[0], (carMap.get(carname[0]) / data.length).toFixed(3));
+//   }
 
-  svg
-    .append('g')
-    .attr('transform', 'translate(' + (width / 2 - 120) + ',' + 20 + ')')
-    .append('text')
-    .text('Passed % of Emmisions Tests')
-    .attr('class', 'title');
-});
+//   const arc = g
+//     .selectAll('.arc')
+//     .data(pie(carMap))
+//     .enter()
+//     .append('g')
+//     .attr('class', 'arc');
 
-const carSet = new Set(carList);
-console.log(carSet);
+//   console.log(carMap.keys());
+//   arc
+//     .append('path')
+//     .attr('d', path)
+//     .attr('fill', (d) => color(d.data.company));
+
+//   arc
+//     .append('text')
+//     .attr('transform', (d) => 'translate(' + label.centroid(d) + ')')
+//     .text(carMap.keys());
+
+//   svg
+//     .append('g')
+//     .attr('transform', 'translate(' + (width / 2 - 120) + ',' + 20 + ')')
+//     .append('text')
+//     .text('Car Makes of Dataset')
+//     .attr('class', 'title');
+// });
+
+// console.log(carList);
+// console.log('length', carList.length);
+// console.log(Array.isArray(carList));
+// console.log(carList[0]);
+// let carSet = new Set();
+// carList.map((item) => carSet.add(item));
+// console.log(carSet);
