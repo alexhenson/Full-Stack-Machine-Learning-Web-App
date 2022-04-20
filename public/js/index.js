@@ -145,7 +145,7 @@ d3.csv('/data/cars_percent.csv').then((data) => {
     .append('text')
     .style('font', '16px Helvetica')
     .attr('transform', (d) => 'translate(' + label.centroid(d) + 100 + ')')
-    .text((d) => d.data.percent);
+    .text((d) => d.data.percent + '%');
   
   // Places a chart title
   svg
