@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Descriptive Methods</title>
+    <title>Predictive Method</title>
     <script src="https://d3js.org/d3.v7.min.js" defer></script>
     <script src="https://d3js.org/d3-scale.v3.min.js" defer></script>
     <script src="https://d3js.org/d3-axis.v1.min.js" defer></script>
-    <script src="js/index.js" defer></script>
+    <script src="js/predictive.js" defer></script>
 
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/data.css" />
@@ -27,36 +27,22 @@
         </ul>
       </nav>
     </header>
+
     <main>
-      <h1 class="headers">Descriptive Methods for Retro Cars</h1>
-      <p>
-        The descriptive methods shown below come from a dataset of 392 cars. The
-        cars are mainly from the 1970s and early 1980s. If you would like to
-        take a closer look at the data, the CSV file can be <a href="data/cars.csv">downloaded here</a>.
-      </p>
-      <div id="app">
-        <div id="chart">
-          <h2 class="headers">
-            Count of Top 10 Most Popular Car Makes in Dataset
-          </h2>
-          <svg></svg>
+      <h1 class="headers">Predictive Method for Retro Cars</h1>
+      <p>The predictive method show below uses linear regression to show how fuel efficiency (measured in miles per gallon(mpg)) </p>
+      <form class="input-form" action="/input" method="POST">
+        <div class="form-control">
+          <label class="label" for="horsepower">Horsepower</label>
+          <input type="number" name="horsepower" id="horsepower" />
+          <label class="label" for="displacement">Displacement</label>
+          <input type="number" name="displacement" id="displacement" />
+          <label class="label" for="weight">Weight</label>
+          <input type="number" name="weight" id="weight" />
         </div>
-      </div>
 
-      <hr />
-      <div id="app">
-        <div id="chart">
-          <svg class="pie" width="500" height="400"></svg>
-        </div>
-      </div>
-
-      <hr />
-
-      <div id="app">
-        <div id="chart">
-          <div class="scatter"></div>
-        </div>
-      </div>
+        <button type="submit">Make Prediction</button>
+      </form>
     </main>
   </body>
 </html>

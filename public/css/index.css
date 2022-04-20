@@ -15,6 +15,23 @@ main {
   margin: auto;
 }
 
+hr {
+  border:10px dotted grey;
+  border-bottom: none;
+  width: 4%;
+  margin: 100px auto;
+}
+
+p {
+  margin: 50px auto;
+  text-align: center;
+  width: 50%;
+}
+
+a {
+  color: #00695c;
+}
+
 .main-header {
   width: 100%;
   height: 3.5rem;

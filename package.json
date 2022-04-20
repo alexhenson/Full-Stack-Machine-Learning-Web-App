@@ -19,6 +19,7 @@
     "mongoose": "^6.2.10",
     "node-remote-plot": "^1.2.0",
     "nodemon": "^2.0.15",
+    "plot": "^1.0.22",
     "shuffle-seed": "^1.1.6"
   }
 }

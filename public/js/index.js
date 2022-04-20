@@ -47,6 +47,7 @@ d3.csv('data/cars.csv').then((data) => {
   chart
     .append('g')
     .call(d3.axisBottom(x).tickSizeOuter(0))
+    .style('font', '16px Helvetica')
     .attr('transform', `translate(0, ${CHART_HEIGHT})`)
     .attr('color', 'black');
 
@@ -88,7 +89,7 @@ d3.csv('data/cars.csv').then((data) => {
   renderChart();
 });
 
-// Pie Chart
+// PIE CHART
 const svg = d3.select('.pie'),
   width = svg.attr('width'),
   height = svg.attr('height'),
@@ -108,6 +109,7 @@ const label = d3
   .arc()
   .outerRadius(radius)
   .innerRadius(radius - 150);
+
 d3.csv('/data/cars_percent.csv').then((data) => {
   var arc = g
     .selectAll('.arc')
@@ -120,14 +122,108 @@ d3.csv('/data/cars_percent.csv').then((data) => {
     .attr('d', path)
     .attr('fill', (d) => color(d.data.status));
 
+  // Places TRUE and FALSE labels outside of the pie chart
   arc
     .append('text')
-    .attr('transform', (d) => 'translate(' + label.centroid(d) + ')')
+    .style('font', '16px Helvetica')
+    .attr('transform', (d) => {
+      return (
+        'translate(' +
+        (radius - 12) *
+          Math.sin((d.endAngle - d.startAngle) / 2 + d.startAngle) +
+        ', ' +
+        -1 *
+          (radius - 12) *
+          Math.cos((d.endAngle - d.startAngle) / 2 + d.startAngle) +
+        ')'
+      );
+    })
     .text((d) => d.data.status);
+  
+  // Places percentage labels in the pie chart
+  arc
+    .append('text')
+    .style('font', '16px Helvetica')
+    .attr('transform', (d) => 'translate(' + label.centroid(d) + 100 + ')')
+    .text((d) => d.data.percent);
+  
+  // Places a chart title
   svg
     .append('g')
     .attr('transform', 'translate(' + (width / 2 - 180) + ',' + 20 + ')')
     .append('text')
-    .text('Emmissions Pass/Fail Percentage')
+    .text('Emmissions Passing Percentage')
     .attr('class', 'title');
+});
+
+//SCATTERPLOT
+// set the dimensions and margins of the graph
+const margin = { top: 10, right: 30, bottom: 30, left: 60 },
+  scatWidth = 800 - margin.left - margin.right,
+  scatHeight = 600 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+const scatSvg = d3
+  .select('.scatter')
+  .append('svg')
+  .attr('width', scatWidth + margin.left + margin.right)
+  .attr('height', scatHeight + margin.top + margin.bottom)
+  .append('g')
+  .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+//Read the data
+d3.csv('/data/cars.csv').then(function (data) {
+  // Add X axis
+  const x = d3.scaleLinear().domain([0, 260]).range([0, scatWidth]);
+  scatSvg
+    .append('g')
+    .attr('transform', `translate(0, ${scatHeight})`)
+    .call(d3.axisBottom(x));
+
+  // Add Y axis
+  const y = d3.scaleLinear().domain([0, 50]).range([scatHeight, 0]);
+  scatSvg.append('g').call(d3.axisLeft(y));
+
+  // Add dots
+  scatSvg
+    .append('g')
+    .selectAll('dot')
+    .data(data)
+    .join('circle')
+    .attr('cx', function (d) {
+      return x(d.horsepower);
+    })
+    .attr('cy', function (d) {
+      return y(d.mpg);
+    })
+    .attr('r', 1.5)
+    .style('fill', '#69b3a2');
+
+  // Add chart title
+  scatSvg
+    .append('g')
+    .attr('transform', 'translate(' + (scatWidth / 2 - 150) + ',' + 20 + ')')
+    .append('text')
+    .text('Horsepower vs. Miles per Gallon (MPG)')
+    .attr('class', 'title');
+
+  scatSvg
+    .append('text')
+    .style('font', '22px Helvetica')
+    .attr('class', 'x label')
+    .attr('text-anchor', 'middle')
+    .attr('x', scatWidth / 2)
+    .attr('y', scatHeight - 10)
+    .text('Horsepower');
+
+  scatSvg
+    .append('text')
+    .style('font', '22px Helvetica')
+    .attr('class', 'y label')
+    .attr('text-anchor', 'middle')
+    .attr('x', -300)
+    .attr('y', -60)
+    .attr('dy', '.75em')
+    .attr('transform', 'rotate(-90)')
+    .text('Miles per Gallon (MPG)');
 });

@@ -4,20 +4,16 @@ const loadCSV = require('../util/load-csv');
 const LinearRegression = require('./linear-regression');
 const plot = require('node-remote-plot');
 
-let { features, labels, testFeatures, testLabels } = loadCSV('../data/cars.csv', {
+let { features, labels, testFeatures, testLabels } = loadCSV('../public/data/cars.csv', {
   shuffle: true,
   splitTest: 100,
   dataColumns: ['horsepower', 'weight', 'displacement'],
   labelColumns: ['mpg'],
 });
 
-// console.log('index features', features);
-// console.log('index test features', testFeatures);
-console.log('index labels', labels);
-
 const regression = new LinearRegression(features, labels, {
   learningRate: 0.1,
-  iterations: 40,
+  iterations: 30,
   batchSize: 10,
 });
 
@@ -33,5 +29,5 @@ plot({
 
 console.log('R2 is', r2);
 
-// regression.predict([[120, 2, 380]]).print();
+regression.predict([[120, 2, 380]]).print();
 
