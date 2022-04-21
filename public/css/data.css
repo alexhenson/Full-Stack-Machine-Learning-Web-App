@@ -11,13 +11,15 @@
 .form-control label,
 .form-control input {
     display: block;
-    width: 100%;
+    width: 50%;
+    margin: auto;
 }
 
 .form-control input {
     border: 1px solid #000000;
     font: inherit;
     border-radius: 2px;
+    margin-bottom: 20px;
 }
 
 .label {
