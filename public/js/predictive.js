@@ -1,8 +1,8 @@
-if (typeof exports === 'undefined') {
-  let exports = this['sampleModule'] = {};
-}
+// if (typeof exports === 'undefined') {
+//   let exports = this['index'] = {};
+// }
 
-// const regressionObj = require(['../../linear-regression/index']);
+const regressionObj = require(['../../linear-regression/index']);
 
 // import trainAndTest from 'linear-regression/index.js';
 
