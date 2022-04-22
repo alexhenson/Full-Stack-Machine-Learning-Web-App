@@ -1,12 +1,17 @@
-// const { trainAndTest, predict } = require('../../linear-regression/index');
+if (typeof exports === 'undefined') {
+  let exports = this['sampleModule'] = {};
+}
 
-// const linearRegression = require('../../linear-regression/index');
-// const trainAndTest = linearRegression.trainAndTest;
+// const regressionObj = require(['../../linear-regression/index']);
+
+// import trainAndTest from 'linear-regression/index.js';
 
 const horsepower = document.getElementById('horsepower').value;
 const weight = document.getElementById('weight').value;
 const displacement = document.getElementById('displacement').value;
 
-// console.log(trainAndTest());
 
-// need to figure out how to export functions
+
+// console.log(regressionObj.trainAndTest());
+
+

@@ -45,7 +45,5 @@ const makePrediction = (horsepower, weight, displacement) =>
 // console.log(trainAndTest());
 // console.log(makePrediction(100, 2, 300));
 
-module.exports = {
-  trainAndTest: function () {},
-  predict: function () {},
-};
+exports.trainAndTest = trainAndTest;
+exports.makePrediction = makePrediction;
