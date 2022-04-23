@@ -1,4 +1,4 @@
-const regressionObj = require('../linear-regression/index');
+// const regressionObj = require('../linear-regression/index');
 
 // import trainAndTest from 'linear-regression/index.js';
 
