@@ -22,8 +22,11 @@ module.exports = function loadCSV(
   }
 ) {
   let data = fs.readFileSync(filename, { encoding: 'utf-8' });
+  // console.log('data1:', data);
   data = _.map(data.split('\n'), d => d.split(','));
+  // console.log('data2:', data);
   data = _.dropRightWhile(data, val => _.isEqual(val, ['']));
+  // console.log('data3:',data);
   const headers = _.first(data);
 
   data = _.map(data, (row, index) => {
