@@ -11,7 +11,7 @@ const router = express.Router();
 // });
 
 router.get('/predictive', (req, res, next) => {
-  res.render('/predictive', {
+  res.render('predictive', {
     pageTitle: 'Predictive Method',
     path: '/predictive'
   });

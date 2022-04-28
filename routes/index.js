@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
   res.render('index', {
-    pagetitle: 'Descriptive Methods',
+    pageTitle: 'Descriptive Methods',
     path: '/',
   });
 });
