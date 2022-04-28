@@ -6,8 +6,15 @@ const rootDir = require('../util/path');
 
 const router = express.Router();
 
+// router.get('/predictive', (req, res, next) => {
+//   res.sendFile(path.join(rootDir, 'views', 'predictive.html'));
+// });
+
 router.get('/predictive', (req, res, next) => {
-  res.sendFile(path.join(rootDir, 'views', 'predictive.html'));
+  res.render('/predictive', {
+    pageTitle: 'Predictive Method',
+    path: '/predictive'
+  });
 });
 
 module.exports = router;

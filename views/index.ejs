@@ -1,0 +1,39 @@
+<%- include('includes/head.ejs') %>
+<script src="js/index.js" defer></script>
+</head>
+
+<body>
+    <%- include('includes/navigation.ejs') %>
+
+    <main>
+      <h1 class="headers">Descriptive Methods for Retro Cars</h1>
+      <p>
+        The descriptive methods shown below come from a dataset of 392 cars. The
+        cars are mainly from the 1970s and early 1980s. If you would like to
+        take a closer look at the data, the CSV file can be <a href="data/cars.csv">downloaded here</a>.
+      </p>
+      <div id="app">
+        <div id="chart">
+          <h2 class="headers">
+            Count of Top 10 Most Popular Car Makes in Dataset
+          </h2>
+          <svg></svg>
+        </div>
+      </div>
+
+      <hr />
+      <div id="app">
+        <div id="chart">
+          <svg class="pie" width="500" height="400"></svg>
+        </div>
+      </div>
+
+      <hr />
+
+      <div id="app">
+        <div id="chart">
+          <div class="scatter"></div>
+        </div>
+      </div>
+    </main>
+<%- include('includes/end.ejs') %>

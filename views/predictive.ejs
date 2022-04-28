@@ -1,0 +1,24 @@
+<%- include('includes/head.ejs') %>
+<script src="js/predictive.js"></script>
+</head>
+
+<body>
+    <%- include('includes/navigation.ejs') %>
+
+    <main>
+      <h1 class="headers">Predictive Method for Retro Cars</h1>
+      <p>The predictive method show below uses linear regression to show how fuel efficiency (measured in miles per gallon(mpg)) </p>
+      <form class="input-form" action="/input" method="POST">
+        <div class="form-control">
+          <label class="label" for="horsepower">Horsepower</label>
+          <input class="input" type="number" name="horsepower" id="horsepower" />
+          <label class="label" for="weight">Weight (tons)</label>
+          <input class="input" type="number" name="weight" id="weight" />
+          <label class="label" for="displacement">Displacement (cubic in.)</label>
+          <input class="input" type="number" name="displacement" id="displacement" />
+        </div>
+
+        <button type="submit">Make Prediction</button>
+      </form>
+    </main>
+<%- include('includes/end.ejs') %>

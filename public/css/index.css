@@ -32,6 +32,13 @@ a {
   color: #00695c;
 }
 
+.headers {
+  text-align: center;
+  display: block;
+  margin: auto;
+  width: 50%;
+}
+
 .main-header {
   width: 100%;
   height: 3.5rem;

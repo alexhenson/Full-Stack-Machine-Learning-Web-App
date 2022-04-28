@@ -1,4 +1,4 @@
-const regressionObj = require('../linear-regression/index');
+// const regressionObj = require('../linear-regression/index');
 
 // import trainAndTest from 'linear-regression/index.js';
 
@@ -6,7 +6,6 @@ const regressionObj = require('../linear-regression/index');
 // const weight = document.getElementById('weight');
 // const displacement = document.getElementById('displacement');
 
-// alert('predictive');
+alert('predictive');
 
-
-console.log(regressionObj.trainAndTest());
+// console.log(regressionObj.trainAndTest());

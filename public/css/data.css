@@ -26,13 +26,6 @@
     text-align: center;
 }
 
-.headers {
-    text-align: center;
-    display: block;
-    margin: auto;
-    width: 50%;
-}
-
 /* d3 charts */
 
 #app {
