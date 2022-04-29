@@ -50,6 +50,11 @@ fill: #00695c;
 fill: #00695c;
 }
 
+.image {
+    margin: auto;
+    display: block;
+}
+
 /* pie-chart */
 .arc text{
 	font: 10px sans-serif;
