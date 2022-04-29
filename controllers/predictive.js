@@ -12,13 +12,13 @@ exports.getPredictive = (req, res, next) => {
 };
 
 // This should take user input and use it to make a prediction
-// exports.makePrediction = (req, res, next) => {
-//   const prediction = new Prediction(
-//     req.body.horsepower,
-//     req.body.weight,
-//     req.body.displacement
-//   );
-//   res.render('predictive', {
-//     prediction: prediction.makePrediction(),
-//   });
-// };
+exports.makePrediction = (req, res, next) => {
+  const prediction = new Prediction(
+    req.body.horsepower,
+    req.body.weight,
+    req.body.displacement
+  );
+  res.render('predictive', {
+    prediction: prediction.makePrediction(),
+  });
+};
