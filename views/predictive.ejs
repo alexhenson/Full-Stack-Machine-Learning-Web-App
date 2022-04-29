@@ -7,6 +7,13 @@
 
     <main>
       <h1 class="headers">Predictive Method for Retro Cars</h1>
+      <div>
+        <p>In statistics, linear regression is a linear approach to modeling the relationship between a dependent variable and one or more independent variables.  In our <a href="data/cars.csv">cars dataset</a>, the dependent variable is the fuel efficiency measured in miles per galllon (mpg), and the independent variables are the horsepower, weight of the car, and the displacement (size) of the engine.</p>
+        <img class="image" src="/linear-regression/plot.png" alt="Mean Squared Error by Iteration Plot">
+        <p>The chart above was generated in real time by a linear regression model called <strong>gradient descent</strong> (an iterative optimization algorithm to find the minimum of a function) that was run on a data set of 392 cars.  Of this data set, 292 cars were randomly selected to be a part of the <em>training set</em> to train the machine learning model.  The other 100 cars are part of the <em>test set</em> to determine how accurate the model was.  </p>
+        <p>One of the goals of gradient descent The R2 for the model is <%- r2 %> </p>>
+      </div>
+      <h2 class="headers">Make A Prediction</h2>
       <p>The predictive method show below uses linear regression to show how fuel efficiency (measured in miles per gallon(mpg)) </p>
       <form class="input-form" action="/input" method="POST">
         <div class="form-control">
@@ -20,5 +27,7 @@
 
         <button type="submit">Make Prediction</button>
       </form>
+
+      
     </main>
 <%- include('includes/end.ejs') %>
