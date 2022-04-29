@@ -2,19 +2,10 @@ const path = require('path');
 
 const express = require('express');
 
-const rootDir = require('../util/path');
+const predictiveController = require('../controllers/predictive')
 
 const router = express.Router();
 
-// router.get('/predictive', (req, res, next) => {
-//   res.sendFile(path.join(rootDir, 'views', 'predictive.html'));
-// });
-
-router.get('/predictive', (req, res, next) => {
-  res.render('predictive', {
-    pageTitle: 'Predictive Method',
-    path: '/predictive'
-  });
-});
+router.get('/predictive', predictiveController.getPredictive);
 
 module.exports = router;

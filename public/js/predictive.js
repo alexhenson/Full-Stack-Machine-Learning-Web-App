@@ -6,6 +6,6 @@
 // const weight = document.getElementById('weight');
 // const displacement = document.getElementById('displacement');
 
-alert('predictive');
+// alert('predictive');
 
 // console.log(regressionObj.trainAndTest());

@@ -5,7 +5,6 @@ const LinearRegression = require('./linear-regression');
 const plot = require('node-remote-plot');
 
 let regression = null;
-export let r2Value = '';
 
 const trainAndTest = () => {
   let { features, labels, testFeatures, testLabels } = loadCSV(
@@ -38,15 +37,15 @@ const trainAndTest = () => {
   return (r2 * 100).toFixed(2) + '%';
 };
 
-const makePrediction = (horsepower, weight, displacement) =>
-  regression
+const makePrediction = (horsepower, weight, displacement) => {
+  return regression
     .predict([[horsepower, weight, displacement]])
     .dataSync()[0]
     .toFixed(2);
+};
 
 console.log('r2 value:', trainAndTest());
 console.log("Model's Prediction of MPG:", makePrediction(100, 2, 300) + 'mpg');
 
 exports.trainAndTest = trainAndTest;
 exports.makePrediction = makePrediction;
-exports.r2Value = r2Value;

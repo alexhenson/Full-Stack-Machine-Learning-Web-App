@@ -2,7 +2,7 @@ const path = require('path');
 
 const express = require('express');
 
-const rootDir = require('../util/path');
+const descriptiveController = require('../controllers/index');
 
 const router = express.Router();
 
@@ -10,11 +10,6 @@ const router = express.Router();
 //   res.sendFile(path.join(rootDir, 'views', 'index.html'));
 // });
 
-router.get('/', (req, res, next) => {
-  res.render('index', {
-    pageTitle: 'Descriptive Methods',
-    path: '/',
-  });
-});
+router.get('/', descriptiveController.getDescriptive);
 
 module.exports = router;
