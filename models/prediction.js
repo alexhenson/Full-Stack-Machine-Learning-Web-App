@@ -37,7 +37,7 @@ module.exports = class Prediction {
   }
 
   static fetchAll() {
-    return products;
+    getProductsFromFile(cb);
   }
 
   makePrediction() {

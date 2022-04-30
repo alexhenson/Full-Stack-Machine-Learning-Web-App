@@ -28,8 +28,10 @@ exports.makePrediction = (req, res, next) => {
 };
 
 exports.getPredictions = (req, res, next) => {
-  const predictions = Prediction.fetchAll();
-  res.render('predictive', {
-    // need to figure out what to put here
-  })
+  Prediction.fetchAll(predictions => {
+    res.render('predictive', {
+      pageTitle: 'Predictive Method',
+      path: '/predictive',
+    })
+  });
 }
