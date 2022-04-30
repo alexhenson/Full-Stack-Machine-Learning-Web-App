@@ -3,6 +3,8 @@ const path = require('path');
 
 const linearRegression = require('../public/linear-regression/index');
 
+const predictions = [];
+
 module.exports = class Prediction {
   constructor(horsepower, weight, displacement) {
     this.horsepower = horsepower;
@@ -11,14 +13,19 @@ module.exports = class Prediction {
   }
 
   save() {
-    const p = path.join(
-      path.dirname(process.mainModual.fileName),
-      'data',
-      'predictions.json'
-    );
-    fs.readFile(p, (err, fileContent) => {
-      console.log(fileContent)
-    });
+    predictions.push(this);
+    // const p = path.join(
+    //   path.dirname(process.mainModual.fileName),
+    //   'data',
+    //   'predictions.json'
+    // );
+    // fs.readFile(p, (err, fileContent) => {
+    //   console.log(fileContent)
+    // });
+  }
+
+  static fetchAll() {
+    return products;
   }
 
   makePrediction() {
