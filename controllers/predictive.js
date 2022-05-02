@@ -12,7 +12,11 @@ exports.getPredictive = (req, res, next) => {
 
 //post
 exports.postMakePrediction = (req, res, next) => {
-  const prediction = new Prediction(100, 2, 300);
+  const prediction = new Prediction(
+    req.body.horsepower,
+    req.body.weight,
+    req.body.displacement
+  );
   prediction.save();
   res.redirect('/predictions');
 };
