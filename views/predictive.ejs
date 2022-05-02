@@ -1,5 +1,4 @@
 <%- include('includes/head.ejs') %>
-<script src="js/predictive.js"></script>
 </head>
 
 <body>
@@ -16,30 +15,24 @@
       </div>
       <h2 class="headers">Make A Prediction</h2>
       <p>The predictive method shown below uses linear regression to predict the fuel efficiency (measured in miles per gallon(mpg)) based on the horsepower, weight, and displacement of the engine.  It should be noted that in the US the displacement of engines in cars was measured in cubic inches, rather than in cubic centimeters or liters as is common today.</p>
+      
+      <form class="input-form" action="/predictive" method="POST">
+        <div class="form-control">
+          <label class="label" for="horsepower">Horsepower</label>
+          <input class="input" type="number" name="horsepower" id="horsepower" />
+          <label class="label" for="weight">Weight (tons)</label>
+          <input class="input" type="number" name="weight" id="weight" />
+          <label class="label" for="displacement">Displacement (cubic in.)</label>
+          <input class="input" type="number" name="displacement" id="displacement" />
+        </div>
+        
+          <button class="btn" type="submit" id="predict-button">Make Prediction</button>
+      </form>
+      
       <div id="app">
         <div id="chart">
-          <form class="input-form" action="/input" method="POST">
-            <div class="form-control">
-              <label class="label" for="horsepower">Horsepower</label>
-              <input class="input" type="number" name="horsepower" id="horsepower" />
-              <label class="label" for="weight">Weight (tons)</label>
-              <input class="input" type="number" name="weight" id="weight" />
-              <label class="label" for="displacement">Displacement (cubic in.)</label>
-              <input class="input" type="number" name="displacement" id="displacement" />
-            </div>
-
-            <form action="/prediction" method="post">
-              <button type="submit" id="predict-button">Make Prediction</button>
-            </form>
           
-          </form>
-          <div id="prediction" style="display:none">
-            <p>Your prediction is miles per gallon</p>
-          </div>
         </div>
       </div>
-      
-
-      
     </main>
 <%- include('includes/end.ejs') %>
