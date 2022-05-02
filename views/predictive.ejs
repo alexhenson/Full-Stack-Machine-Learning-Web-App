@@ -8,30 +8,28 @@
       <h1 class="headers">Predictive Method for Retro Cars</h1>
       <div>
         <p>In statistics, linear regression is a linear approach to modeling the relationship between a dependent variable and one or more independent variables.  In our <a href="data/cars.csv">cars dataset</a>, the dependent variable is the fuel efficiency measured in miles per galllon (mpg), and the independent variables are the horsepower, weight of the car, and the displacement (size) of the engine.</p>
-        <div id="app"><div id="chart"><img class="image" src="/linear-regression/plot.png" alt="Mean Squared Error by Iteration Plot"></div></div>
+        <div id="app"><div id="chart"><img class="image" src="../linear-regression/plot.png" alt="Mean Squared Error by Iteration Plot"></div></div>
         <p>The chart above was generated in real time by a linear regression model called <strong>gradient descent</strong> (an iterative optimization algorithm to find the minimum of a function) that was run on a data set of 392 cars.  Of this data set, 292 cars were randomly selected to be a part of the <em>training set</em> to train the machine learning model.  The other 100 cars are part of the <em>test set</em> to determine how accurate the model was.  </p>
         <p>The gradient descent algorithm works to minimize the mean squared error (MSE).  The MSE tells us how close he regression line is to the set of our data points.  The lower the MSE is the better the forecast.  As seen in the above chart, the MSE decreases with every iteration of the gradient descent algorithm and starts to level off to around 18.7 after about 16 iterations.</p>
         <p>Another metric that the model produces is the R-squared (R2) value, which also measures how well the linear model fits our data with the caveat that R2 is a normalized version of MSE, so its particularly useful for comparing the performance of different models.  The higher the R2 the more of the variability can be explained by the model.  The R2 for the current model is <%- r2 %></p>
       </div>
       <h2 class="headers">Make A Prediction</h2>
       <p>The predictive method shown below uses linear regression to predict the fuel efficiency (measured in miles per gallon(mpg)) based on the horsepower, weight, and displacement of the engine.  It should be noted that in the US the displacement of engines in cars was measured in cubic inches, rather than in cubic centimeters or liters as is common today.</p>
-      
-      <form class="input-form" action="/predictive" method="POST">
-        <div class="form-control">
-          <label class="label" for="horsepower">Horsepower</label>
-          <input class="input" type="number" name="horsepower" id="horsepower" />
-          <label class="label" for="weight">Weight (tons)</label>
-          <input class="input" type="number" name="weight" id="weight" />
-          <label class="label" for="displacement">Displacement (cubic in.)</label>
-          <input class="input" type="number" name="displacement" id="displacement" />
-        </div>
-        
-          <button class="btn" type="submit" id="predict-button">Make Prediction</button>
-      </form>
-      
+         
       <div id="app">
         <div id="chart">
-          
+          <form class="input-form" action="/predictive" method="POST">
+            <div class="form-control">
+              <label class="label" for="horsepower">Horsepower</label>
+              <input type="number" name="horsepower" id="horsepower">
+              <label class="label" for="weight">Weight (tons)</label>
+              <input type="number" name="weight" id="weight">
+              <label class="label" for="displacement">Displacement (cubic in.)</label>
+              <input type="number" name="displacement" id="displacement">
+            </div>
+            
+              <button type="submit" id="predict-button">Make Prediction</button>
+          </form>    
         </div>
       </div>
     </main>

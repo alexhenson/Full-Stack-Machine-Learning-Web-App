@@ -95,15 +95,7 @@ a {
 .card__content h1,
 .card__content h2,
 .card__content p {
-  margin: 0;
-}
-
-.card__image {
-  width: 100%;
-}
-
-.card__image img {
-  width: 100%;
+  margin: auto;
 }
 
 .card__actions {

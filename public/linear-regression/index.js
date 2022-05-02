@@ -33,6 +33,7 @@ const trainAndTest = () => {
     yLabel: 'Mean Squared Error',
     title: 'Mean Squared Error By Iteration',
   });
+  
   r2Value = (r2 * 100).toFixed(2) + '%';
   console.log('trainedAndTested');
   return (r2 * 100).toFixed(2) + '%';

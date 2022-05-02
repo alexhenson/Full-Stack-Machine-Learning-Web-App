@@ -11,21 +11,18 @@ exports.getPredictive = (req, res, next) => {
 };
 
 //post
-exports.makePrediction = (req, res, next) => {
-  const prediction = new Prediction(req.body.horsepower);
+exports.postMakePrediction = (req, res, next) => {
+  const prediction = new Prediction(100, 2, 300);
   prediction.save();
   res.redirect('/predictions');
 };
 
 exports.getPredictions = (req, res, next) => {
   const predictions = Prediction.fetchAll();
-  console.log(predictions);
   res.render('predictions', {
     preds: predictions,
     pageTitle: 'Predictions',
     path: '/predictions',
-    hasProducts: predictions.length > 0,
-    activeShop: true,
-    productCSS: true,
+    hasPredictions: predictions.length > 0,
   });
 };

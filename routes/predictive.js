@@ -7,7 +7,7 @@ const predictiveController = require('../controllers/predictive')
 const router = express.Router();
 
 router.get('/predictive', predictiveController.getPredictive);
-router.post('/predictive', predictiveController.makePrediction);
+router.post('/predictive', predictiveController.postMakePrediction);
 router.get('/predictions', predictiveController.getPredictions);
 
 module.exports = router;
