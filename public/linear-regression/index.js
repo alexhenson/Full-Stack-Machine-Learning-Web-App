@@ -33,7 +33,7 @@ const trainAndTest = () => {
     yLabel: 'Mean Squared Error',
     title: 'Mean Squared Error By Iteration',
   });
-  
+
   r2Value = (r2 * 100).toFixed(2) + '%';
   console.log('trainedAndTested');
   return (r2 * 100).toFixed(2) + '%';
@@ -45,9 +45,6 @@ const makePrediction = (horsepower, weight, displacement) => {
     .dataSync()[0]
     .toFixed(2);
 };
-
-// console.log('r2 value:', trainAndTest());
-// console.log("Model's Prediction of MPG:", makePrediction(100, 2, 300) + 'mpg');
 
 exports.trainAndTest = trainAndTest;
 exports.makePrediction = makePrediction;

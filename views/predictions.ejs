@@ -14,11 +14,15 @@
                         </header>
                         <div class="card__content">
                             <h3 class="predicted-info">Predicted Fuel Efficiency: <%= prediction.mpg %> mpg</h3>
-                            <p class="info">Horsepower: <%= prediction.horsepower %> horsepower</p>
-                            <p class="info">Weight: <%= prediction.weight %> tons</p>
-                            <p class="info">Displacement: <%= prediction.displacement %> cubic inches</p>
+                            <p class="info"><strong>Horsepower:</strong> <%= prediction.horsepower %> horsepower</p>
+                            <p class="info"><strong>Weight:</strong> <%= prediction.weight %> tons</p>
+                            <p class="info"><strong></strong>Displacement: <%= prediction.displacement %> cubic inches</p>
                             
                         </div>
+                        <form class="input-form" action="/" method="GET">
+                            <p class="info-button">Please see the "Horsepower vs. Miles per Gallon" chart to put your prediction into context.</p>
+                            <button class="get-btn" type="submit">Descriptive Methods</button>
+                        </form>  
                     </article>
                 <% } %>
             </div>

@@ -33,6 +33,16 @@
     width: auto;
 }
 
+.info-button {
+    text-align: left;
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+.product-item {
+    padding-bottom: 2rem;
+}
+
 /* d3 charts */
 
 #app {
